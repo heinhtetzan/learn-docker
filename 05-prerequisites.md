@@ -146,23 +146,6 @@ ssh-copy-id user@remotehost
 
 ---
 
-# ⚡ **6. Quick Reference Table**
-
-| Topic             | Command                     | Explanation                      |
-| ----------------- | --------------------------- | -------------------------------- |
-| Show IP           | `ifconfig` / `ip addr show` | View network interfaces & IP     |
-| Enable interface  | `ip link set eth0 up`       | Turn on network interface        |
-| Ping host         | `ping google.com`           | Test connectivity & latency      |
-| Trace route       | `traceroute host`           | See path packets take            |
-| Open ports        | `ss -tuln`                  | Check listening ports            |
-| Remote port check | `nc -zv host port`          | Test if remote port is reachable |
-| HTTP request      | `curl http://example.com`   | Test web server                  |
-| Download file     | `curl -O URL`               | Download file via HTTP           |
-| SSH connect       | `ssh user@host`             | Secure remote login              |
-| SCP file          | `scp file user@host:/path`  | Copy file over SSH               |
-
----
-
 # 🔥 **1. Firewall**
 
 ### **What is a Firewall?**
@@ -286,53 +269,3 @@ curl ifconfig.me   # see public IP before/after VPN
 ```
 
 ---
-
-# ⚡ **5. Quick Reference Table**
-
-| Topic             | Purpose                             | Basic Commands / Tools                           |
-| ----------------- | ----------------------------------- | ------------------------------------------------ |
-| **Firewall**      | Control network traffic             | `ufw enable/disable`, `ufw allow 22`, `iptables` |
-| **Proxy**         | Client traffic via intermediary     | `export http_proxy=...`, `curl`                  |
-| **Reverse Proxy** | Forward requests to backend servers | Nginx, Apache, HAProxy, `proxy_pass`             |
-| **VPN**           | Secure encrypted tunnel             | `wg-quick up/down`, `openvpn client.ovpn`        |
-
----
-
-
-
-# 🌐 **Proxy vs Reverse Proxy**
-
-| Feature                | **Forward Proxy**                                                  | **Reverse Proxy**                                         | **Why / Purpose**                                                                     |
-| ---------------------- | ------------------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| **Position**           | Between **client** and the internet                                | Between **internet** and backend servers                  | Determines who is hidden: client or server                                            |
-| **Client visibility**  | Client knows the proxy                                             | Client usually does **not** know the reverse proxy        | Forward proxy hides the client; reverse proxy hides the server                        |
-| **Server visibility**  | Server usually **does not know the client’s real IP**              | Server sees the reverse proxy IP instead of direct client | Reverse proxy protects backend servers from direct access                             |
-| **Primary Use**        | Privacy, filtering, caching                                        | Load balancing, SSL termination, security, caching        | They solve **different problems**: forward = client-centric, reverse = server-centric |
-| **Examples**           | Squid, TinyProxy                                                   | Nginx, HAProxy, Apache                                    | Tools are optimized for their specific role                                           |
-| **Client requests go** | Client → Proxy → Internet                                          | Internet → Reverse Proxy → Backend Server                 | Flow direction explains who is hidden and controlled                                  |
-| **Caching**            | Can cache websites to reduce bandwidth usage                       | Can cache backend responses to reduce load on servers     | Both improve performance but in different layers                                      |
-| **Security**           | Protects **clients** from malicious sites or enforces access rules | Protects **servers** from attacks, hides server topology  | Security goals differ depending on which side you want to shield                      |
-
----
-
-### 💡 **Why Use Each**
-
-1. **Forward Proxy (Client side)**
-
-   * Hide user identity (IP)
-   * Enforce corporate network policies (block websites, log traffic)
-   * Cache frequently used content for bandwidth savings
-
-2. **Reverse Proxy (Server side)**
-
-   * Hide backend servers from direct access (security)
-   * Load balance traffic across multiple servers (scalability)
-   * Terminate HTTPS / SSL centrally (simplify certificate management)
-   * Cache responses to reduce server load
-
----
-
-### 🔑 **Memory Tip**
-
-* **Forward proxy = hides the client** → “I’m browsing anonymously”
-* **Reverse proxy = hides the server** → “Clients see only the front door, not the house behind it”

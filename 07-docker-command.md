@@ -1,6 +1,4 @@
-Let's go **step by step** and explain `docker pull`, `docker run`, and the `-itpd` options, with examples for your list of images: Ubuntu, Nginx, Node, PHP, MySQL, MongoDB, and MinIO.
-
----
+# Docker Command
 
 ### **1. `docker pull`**
 

@@ -1,9 +1,5 @@
 # Docker Networking
 
-This guide is designed to **teach Docker networking from zero to practical usage**, with clear concepts, commands, and real-world examples.
-
----
-
 ## 1. Why Docker Networking Matters
 
 Docker networking allows **containers to communicate** with:

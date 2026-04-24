@@ -1,19 +1,30 @@
-Below is the **cleanest, simplest explanation** of:
-
-1. **Virtualization (how VMs work)**
-2. **Containerization (how Docker works)**
-3. **How Docker works on Linux, Windows, macOS**
-4. **Why Docker is different from Virtual Machines**
-
-I’ll use diagrams + short explanations.
-
----
-
 # **1. Virtualization (VM)**
+
 
 ### **What is Virtualization?**
 
 Virtualization is running a **full OS inside another OS** using a **hypervisor**.
+
+---
+
+### 🖥️ Virtualization / VM Software Examples
+
+* Oracle VM VirtualBox → Desktop VM
+* VMware Workstation → Desktop VM
+* VMware Fusion → Mac VM
+* Parallels Desktop → Mac VM
+
+---
+
+### ☁️ Server / Cloud Virtualization
+
+* VMware vSphere → Server VM
+* Proxmox VE → Server VM
+* Microsoft Hyper-V Server → Server VM
+* Apache CloudStack → Cloud VM management
+
+---
+
 
 ### **Layers in Virtualization**
 

@@ -1,96 +1,148 @@
+# 📘 Computer System Overview
 
-# **Linux OS Layers (Top → Bottom)**
+## 🖥️ 1. Computer Hardware
 
-## **1. User Applications (User Space)**
-
-Where normal programs run.
-Examples:
-
-* Browsers (Chrome, Firefox)
-* Terminal apps
-* VS Code
-* Docker CLI
-
-➡️ These apps interact with the OS through system calls.
+* CPU (Central Processing Unit)
+* RAM (Memory)
+* Storage (SSD / HDD)
+* Network Interface Card (NIC)
+* GPU (Graphics Processing Unit)
+* Motherboard
+* Input Devices (Keyboard, Mouse)
+* Output Devices (Monitor, Printer)
 
 ---
 
-## **2. System Libraries (glibc, stdlib, OpenSSL, etc.)**
+## 💻 2. Operating Systems
 
-Provide common functions to applications.
-Examples:
+### Desktop / Server OS
 
-* glibc (standard C library)
-* libstdc++ (C++ standard library)
-* OpenSSL
-* GTK, Qt
+* Linux
+* Windows
+* macOS
 
-➡️ Apps use these libraries instead of directly interacting with the kernel.
+### Mobile OS
 
----
-
-## **3. System Call Interface (SCI)**
-
-This is the bridge between **user space** and the **kernel**.
-
-Examples of system calls:
-
-* `read()`
-* `write()`
-* `fork()`
-* `open()`
-* `socket()`
-
-➡️ Allows apps to request low-level operations (filesystem, network, processes).
+* Android
+* iOS
 
 ---
 
-## **4. Linux Kernel (Core of the OS)**
+## 🐧 3. Linux Main Distributions
 
-The heart of Linux — manages resources & hardware.
+### Debian-based
 
-Kernel responsibilities:
+* Debian
+* Ubuntu
+* Linux Mint
 
-* Process management
-* Memory management
-* Device drivers
-* File systems
-* Networking stack
-* Security
+### Arch-based
 
-➡️ Everything must go through the kernel to access hardware.
+* Arch Linux
+* Manjaro
 
----
+### Red Hat-based
 
-## **5. Hardware**
-
-Actual computer components:
-
-* CPU
-* RAM
-* Hard disk / SSD
-* Network card
-* GPU
-* USB, etc.
-
-➡️ Kernel communicates with hardware through **device drivers**.
+* Red Hat Enterprise Linux
+* CentOS
+* Fedora
 
 ---
 
-# **Simple Diagram (Text Version)**
+## 🧱 4. OS Layers (Top → Bottom)
 
-```
+```text
 +----------------------------+
-| User Applications          |
+| User Applications          |  ← Google Chrome, VS Code, Docker CLI
 +----------------------------+
-| System Libraries           |
+| Runtime / Engine           |  ← PHP Runtime, Node.js, JVM
 +----------------------------+
-| System Call Interface      |
+| System Libraries           |  ← glibc, OpenSSL, libstdc++
 +----------------------------+
-| Linux Kernel               |
+| System Calls               |  ← socket(), connect(), read(), write(), open()
 +----------------------------+
-| Hardware                   |
+| Linux Kernel               |  ← process scheduling, memory management, TCP/IP, filesystem
++----------------------------+
+| Hardware                   |  ← CPU, RAM, SSD, Network Card (NIC)
 +----------------------------+
 ```
 
+---
+
+## 🔁 5. Example Flow (Code → System → Hardware)
+
+### 🌐 HTTP Request (Node.js)
+
+```text
+Your Code        → fetch()
+Runtime          → :contentReference[oaicite:13]{index=13}
+Async Engine     → libuv
+System Library   → glibc / :contentReference[oaicite:14]{index=14}
+System Call      → socket(), connect(), read(), write()
+Kernel           → networking stack
+Hardware         → NIC → Internet
+```
+
+---
+
+### 📂 File Read
+
+```text
+Your Code        → read file
+Runtime          → Node.js / PHP
+System Library   → glibc
+System Call      → open(), read()
+Kernel           → filesystem
+Hardware         → SSD / Disk
+```
+
+---
+
+### 🧵 Process Creation
+
+```text
+Command          → run program
+System Call      → fork(), execve()
+Kernel           → process scheduler
+Hardware         → CPU
+```
+
+---
+
+### ⚡ Async I/O (High Performance)
+
+```text
+Runtime          → :contentReference[oaicite:15]{index=15} / :contentReference[oaicite:16]{index=16}
+System Call      → epoll_wait()
+Kernel           → event-driven I/O
+```
+
+---
+
+## 🔌 6. Code → Hardware Mapping (Generic Flow)
+
+```text
+Application Code
+   ↓
+Runtime (Node.js / PHP / Java)
+   ↓
+System Libraries (glibc, OpenSSL)
+   ↓
+System Calls (read, write, socket, etc.)
+   ↓
+Operating System Kernel
+   ↓
+Device Drivers
+   ↓
+Hardware (CPU, RAM, Disk, Network)
+```
+
+---
+
+## 🎯 Summary (Key Idea)
+
+* Developers write code at **application level**
+* OS provides **abstraction layers**
+* Only the **kernel can access hardware**
+* Communication happens through **system calls**
 

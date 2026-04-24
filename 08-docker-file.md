@@ -1,7 +1,3 @@
-Absolutely! Let’s go **step by step** so you can understand **Dockerfile** fully, why it exists, how it works, and see concrete examples for different types of apps: static websites, React apps, and Laravel. I’ll break it down in an easy-to-follow way.
-
----
-
 ## **1. What is a Dockerfile?**
 
 A **Dockerfile** is a **text file** with a set of instructions that tells Docker **how to build an image** for your application.

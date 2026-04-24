@@ -166,8 +166,3 @@ lsb_release -a
 cat /etc/os-release
 ```
 
----
-
-# Want a **one-page PDF cheat sheet** for download?
-
-I can generate a clean printable version for you.
