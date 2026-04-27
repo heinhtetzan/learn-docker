@@ -12,14 +12,18 @@
 | Copy             | `cp source target` |
 | Move             | `mv source target` |
 
-### 📄 **File content**
+---
+
+### 📄 **File Content**
 
 | Action           | Command     |
 | ---------------- | ----------- |
 | Read file        | `cat file`  |
 | View with scroll | `less file` |
-| Edit file (nano) | `nano file` |
-| Edit file (vim)  | `vim file`  |
+| Edit (nano)      | `nano file` |
+| Edit (vim)       | `vim file`  |
+
+---
 
 ### 🔎 **Search**
 
@@ -32,137 +36,56 @@
 
 # 🟦 **2. Ubuntu / Debian (APT)**
 
-### 🔄 **Update & Upgrade**
+### 📦 **Package Management**
 
-```bash
-sudo apt update
-sudo apt upgrade
-```
-
-### 📦 **Install Package**
-
-```bash
-sudo apt install package-name
-```
-
-### ❌ **Remove Package**
-
-```bash
-sudo apt remove package-name
-sudo apt purge package-name   # remove config files too
-```
-
-### 🔍 **Search Package**
-
-```bash
-apt search keyword
-```
+| Action           | Command                         |
+| ---------------- | ------------------------------- |
+| Update packages  | `sudo apt update`               |
+| Upgrade packages | `sudo apt upgrade`              |
+| Install package  | `sudo apt install package-name` |
+| Remove package   | `sudo apt remove package-name`  |
+| Remove + config  | `sudo apt purge package-name`   |
+| Search package   | `apt search keyword`            |
 
 ---
 
-# 🟥 **3. Fedora (DNF)**
+# 🟦 **3. Alpine Linux (APK)**
 
-### 🔄 **Update**
+### 📦 **Package Management**
 
-```bash
-sudo dnf update
-```
-
-### 📦 **Install Package**
-
-```bash
-sudo dnf install package-name
-```
-
-### ❌ **Remove Package**
-
-```bash
-sudo dnf remove package-name
-```
-
-### 🔍 **Search Package**
-
-```bash
-dnf search keyword
-```
+| Action           | Command                     |
+| ---------------- | --------------------------- |
+| Update packages  | `sudo apk update`           |
+| Upgrade packages | `sudo apk upgrade`          |
+| Install package  | `sudo apk add package-name` |
+| Remove package   | `sudo apk del package-name` |
+| Search package   | `apk search keyword`        |
 
 ---
 
-# 🟧 **4. Arch Linux (Pacman)**
+# 🔥 **4. Process Management**
 
-### 🔄 **Update (Full system upgrade)**
-
-```bash
-sudo pacman -Syu
-```
-
-### 📦 **Install Package**
-
-```bash
-sudo pacman -S package-name
-```
-
-### ❌ **Remove Package**
-
-```bash
-sudo pacman -R package-name
-sudo pacman -Rns package-name   # remove dependencies/config
-```
-
-### 🔍 **Search Package**
-
-```bash
-pacman -Ss keyword
-```
+| Action              | Command           |            |
+| ------------------- | ----------------- | ---------- |
+| Find process        | `ps aux           | grep name` |
+| Kill by PID         | `kill PID`        |            |
+| Force kill          | `kill -9 PID`     |            |
+| Kill by name        | `killall firefox` |            |
+| Interactive monitor | `htop`            |            |
 
 ---
 
-# 🔥 **5. Process Management (Kill)**
+# 🟩 **5. System Info**
 
-Works on **all distros**.
-
-### 🧩 **Find Process**
-
-```bash
-ps aux | grep name
-```
-
-### ❌ **Kill by PID**
-
-```bash
-kill PID
-```
-
-### 🔪 **Force kill**
-
-```bash
-kill -9 PID
-```
-
-### 🔥 **Kill all processes by name**
-
-```bash
-killall firefox
-```
+| Action         | Command               |
+| -------------- | --------------------- |
+| System summary | `neofetch`            |
+| CPU info       | `lscpu`               |
+| Disk devices   | `lsblk`               |
+| RAM usage      | `free -h`             |
+| Disk usage     | `df -h`               |
+| OS info        | `cat /etc/os-release` |
+| Kernel info    | `uname -a`            |
+| System details | `hostnamectl`         |
 
 ---
-
-# 🟩 **6. System Info**
-
-### **Check hardware**
-
-```bash
-neofetch      # install via apt/dnf/pacman if needed
-lscpu
-lsblk
-free -h
-df -h
-```
-
-### **Check OS version**
-
-```bash
-lsb_release -a
-cat /etc/os-release
-```
-
