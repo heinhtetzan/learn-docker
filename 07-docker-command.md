@@ -53,12 +53,12 @@ docker run [OPTIONS] <image> [command]
 #### **Ubuntu**
 
 ```bash
-docker run -it ubuntu:22.04 /bin/bash
+docker run -it ubuntu:22.04 bash
 ```
 
 * `-it` → get a shell inside Ubuntu
 * No `-d` needed because we want interactive shell
-* `/bin/bash` → start bash inside container
+* `bash` → start bash inside container
 
 ---
 
@@ -77,7 +77,7 @@ docker run -d -p 8080:80 nginx:latest
 #### **Node**
 
 ```bash
-docker run -it -p 3000:3000 node:20 /bin/bash
+docker run -it -p 3000:3000 node:20 bash
 ```
 
 * `-it` → interactive bash
@@ -93,7 +93,7 @@ node app.js
 #### **PHP**
 
 ```bash
-docker run -it -p 8000:80 php:8.2-apache /bin/bash
+docker run -it -p 8000:80 php:8.2-apache bash
 ```
 
 * `-p 8000:80` → Apache in container accessible on host port 8000
@@ -108,19 +108,19 @@ apache2-foreground
 #### **MySQL**
 
 ```bash
-docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql:8.0
+docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=asdffdsa mysql:8.0
 ```
 
 * `-d` → run in background
 * `-p 3306:3306` → map MySQL port
-* `-e MYSQL_ROOT_PASSWORD=root` → set root password
+* `-e MYSQL_ROOT_PASSWORD=asdffdsa` → set root password
 
 ---
 
 #### **MongoDB**
 
 ```bash
-docker run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=secret mongo:6.0
+docker run -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=asdffdsa mongo:6.0
 ```
 
 * `-d` → background
@@ -193,7 +193,7 @@ Perfect! Let’s expand on `docker run` and add **more useful options** you’ll
 ### **Ubuntu**
 
 ```bash
-docker run -it --name ubuntu-dev --rm -v ~/projects:/projects ubuntu:22.04 /bin/bash
+docker run -it --name ubuntu-dev --rm -v ~/projects:/projects ubuntu:22.04 bash
 ```
 
 * Interactive shell
@@ -220,7 +220,7 @@ docker run -d --name webserver -p 8080:80 -v ~/nginx/conf:/etc/nginx/conf.d -v ~
 ### **Node**
 
 ```bash
-docker run -it --name node-app -p 3000:3000 -v ~/myapp:/usr/src/app -w /usr/src/app node:20 /bin/bash
+docker run -it --name node-app -p 3000:3000 -v ~/myapp:/usr/src/app -w /usr/src/app node:20 bash
 ```
 
 * `-w` → set working directory
@@ -246,7 +246,7 @@ docker run -d --name php-web -p 8000:80 -v ~/php-app:/var/www/html --restart unl
 ```bash
 docker run -d --name mysql-db -p 3306:3306 \
   -v ~/mysql/data:/var/lib/mysql \
-  -e MYSQL_ROOT_PASSWORD=root \
+  -e MYSQL_ROOT_PASSWORD=asdffdsa \
   --restart unless-stopped \
   mysql:8.0
 ```
@@ -262,7 +262,7 @@ docker run -d --name mysql-db -p 3306:3306 \
 docker run -d --name mongo-db -p 27017:27017 \
   -v ~/mongo/data:/data/db \
   -e MONGO_INITDB_ROOT_USERNAME=admin \
-  -e MONGO_INITDB_ROOT_PASSWORD=secret \
+  -e MONGO_INITDB_ROOT_PASSWORD=asdffdsa \
   --restart unless-stopped \
   mongo:6.0
 ```
@@ -275,8 +275,8 @@ docker run -d --name mongo-db -p 27017:27017 \
 docker run -d --name minio \
   -p 9000:9000 -p 9001:9001 \
   -v ~/minio/data:/data \
-  -e MINIO_ROOT_USER=minioadmin \
-  -e MINIO_ROOT_PASSWORD=minioadmin \
+  -e MINIO_ROOT_USER=admin \
+  -e MINIO_ROOT_PASSWORD=asdffdsa \
   --restart unless-stopped \
   minio/minio server /data --console-address ":9001"
 ```
@@ -288,7 +288,7 @@ docker run -d --name minio \
 * Always use `--name` → easier to manage containers (`docker stop mysql-db` etc.)
 * Use `-v` → data won’t disappear after container stops
 * Use `--restart unless-stopped` for services like DB or web server
-* Combine `-it` with `/bin/bash` only when you want to enter the container
+* Combine `-it` with `bash` only when you want to enter the container
 
 ---
 
@@ -407,15 +407,15 @@ docker logs -f nginx-web
 ## **8. Enter a running container: `docker exec`**
 
 ```bash
-docker exec -it <container_name_or_id> /bin/bash
+docker exec -it <container_name_or_id> bash
 ```
 
 * `-it` → interactive bash inside container
 * Example:
 
 ```bash
-docker exec -it ubuntu-dev /bin/bash
-docker exec -it node-app /bin/bash
+docker exec -it ubuntu-dev bash
+docker exec -it node-app bash
 ```
 
 ---
@@ -462,7 +462,7 @@ docker inspect <container_name_or_id>
 | Remove image            | `docker rmi <image>`               |
 | List images             | `docker images`                    |
 | Follow logs             | `docker logs -f <name>`            |
-| Enter container         | `docker exec -it <name> /bin/bash` |
+| Enter container         | `docker exec -it <name> bash` |
 | Remove all unused       | `docker system prune -a`           |
 
 ---
