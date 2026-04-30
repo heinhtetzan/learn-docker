@@ -47,22 +47,32 @@ Let’s say you have an `index.html` file.
 **Dockerfile**:
 
 ```dockerfile
-# 1. Use a lightweight web server image
-FROM nginx:alpine
+# Use lightweight nginx image
+FROM nginx
 
-# 2. Copy your static files to nginx's html folder
-COPY ./index.html /usr/share/nginx/html/index.html
+# Remove default nginx static files
+RUN rm -rf /usr/share/nginx/html/*
 
-# 3. Expose port 80
+# Copy your project files into nginx public folder
+COPY . /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 80
 
-# 4. Default command is already nginx, so no need to override
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
 ```
 
 **Build & run**:
 
 ```bash
 docker build -t static-web .
+
+docker buildx build \
+  --platform linux/amd64,linux/arm64 \
+  -t static-web \
+  .
+
 docker run -p 8080:80 static-web
 ```
 
@@ -222,13 +232,12 @@ services:
 6. **Set default command** (`CMD`/`ENTRYPOINT`).
 7. **Optional optimizations**: multi-stage builds, caching, volumes.
 
----
-Perfect! Let’s go **step by step** on using **Dockerfile with Docker Hub**, including **build, push, pull, and run**. I’ll break it into a clear workflow.
-
 
 ---
 
-## **1. Write a Dockerfile**
+# Publish Docker file to Docker Hub
+
+### **1. Write a Dockerfile**
 
 Let’s take a **simple static web example** (`index.html`):
 
@@ -242,7 +251,7 @@ EXPOSE 80
 
 ---
 
-## **2. Build the Docker Image**
+### **2. Build the Docker Image**
 
 Navigate to your project folder (where Dockerfile exists) and run:
 
@@ -271,7 +280,7 @@ username/static-web  1.0       <id>          5MB
 
 ---
 
-## **3. Log in to Docker Hub**
+### **3. Log in to Docker Hub**
 
 ```bash
 docker login
@@ -282,7 +291,7 @@ docker login
 
 ---
 
-## **4. Push Image to Docker Hub**
+### **4. Push Image to Docker Hub**
 
 ```bash
 docker push username/static-web:1.0
@@ -293,7 +302,7 @@ docker push username/static-web:1.0
 
 ---
 
-## **5. Pull Image from Docker Hub**
+### **5. Pull Image from Docker Hub**
 
 On any machine with Docker:
 
@@ -305,7 +314,7 @@ docker pull username/static-web:1.0
 
 ---
 
-## **6. Run the Container**
+### **6. Run the Container**
 
 ```bash
 docker run -d -p 8080:80 username/static-web:1.0
@@ -327,7 +336,7 @@ You should see the container running. Open **[http://localhost:8080](http://loca
 
 ---
 
-## **7. Optional Commands**
+### **7. Optional Commands**
 
 * **Stop container**:
 
@@ -355,7 +364,7 @@ docker images
 
 ---
 
-## ✅ **Workflow Summary**
+### ✅ **Workflow Summary**
 
 1. Create **Dockerfile**.
 2. `docker build -t username/repo:tag .` → build image.
@@ -366,9 +375,9 @@ docker images
 
 ---
 
+# Extra Knowledge
 
-
-## **1. What is “state” in a container?**
+### **1. What is “state” in a container?**
 
 The **state** of a container is basically the **data and changes that happen while the container is running**. This includes:
 
@@ -380,7 +389,7 @@ By default, **containers are stateless**: when you stop or delete a container, a
 
 ---
 
-## **2. Why statelessness is important**
+### **2. Why statelessness is important**
 
 * **Consistency**: Every time you start a container from the same image, it behaves the same.
 * **Immutability**: Helps with deployment and scaling because you can replace containers safely.
@@ -388,11 +397,11 @@ By default, **containers are stateless**: when you stop or delete a container, a
 
 ---
 
-## **3. How to handle state in Docker**
+### **3. How to handle state in Docker**
 
 If your app needs **persistent data**, Docker provides a few options:
 
-### **a) Volumes (Recommended)**
+#### **a) Volumes (Recommended)**
 
 * A volume is a directory on the host machine managed by Docker.
 * It persists even if the container is deleted.
@@ -403,7 +412,7 @@ docker run -d -v mydata:/app/data my-app
 
 * `/app/data` in container maps to `mydata` volume on host.
 
-### **b) Bind Mounts**
+#### **b) Bind Mounts**
 
 * Maps a **specific folder on your host machine** into the container.
 
@@ -413,13 +422,13 @@ docker run -d -v /home/user/data:/app/data my-app
 
 * Useful for local development so changes on host are reflected in container.
 
-### **c) Database / External Storage**
+#### **c) Database / External Storage**
 
 * For apps like MySQL, Postgres, etc., you usually run a container for the database **and store its data in a volume**, so state is preserved even if the container restarts.
 
 ---
 
-## **4. Ephemeral vs Persistent Containers**
+### **4. Ephemeral vs Persistent Containers**
 
 | Type                | Data survives container restart? | Use Case                      |
 | ------------------- | -------------------------------- | ----------------------------- |
